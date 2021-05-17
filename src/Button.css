@@ -1,0 +1,12 @@
+.Button {
+  padding: 5px 10px;
+  border: 1px solid black;
+  background: white;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.Button--active {
+  background-color: black;
+  color: white;
+}

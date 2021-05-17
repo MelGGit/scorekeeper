@@ -1,0 +1,31 @@
+.ScoreboardRow {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ScoreboardRow__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.ScoreboardRow__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 0;
+  cursor: pointer;
+  background: white;
+}
+
+.ScoreboardRow__button:hover {
+  background: black;
+  color: white;
+}
