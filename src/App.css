@@ -1,0 +1,22 @@
+.App {
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.App__players {
+  display: flex;
+  flex-direction: column;
+}
+
+.App__buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* .App__playerFormContainer {
+
+} */
