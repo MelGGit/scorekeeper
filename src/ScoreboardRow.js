@@ -3,10 +3,10 @@ import './ScoreboardRow.css'
 import PropTypes from 'prop-types'
 
 ScoreboardRow.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   score: PropTypes.number,
-  onMinus: PropTypes.func,
-  onPlus: PropTypes.func,
+  onMinus: PropTypes.func.isRequired,
+  onPlus: PropTypes.func.isRequired,
 }
 
 export default function ScoreboardRow({ name, score, onMinus, onPlus }) {
