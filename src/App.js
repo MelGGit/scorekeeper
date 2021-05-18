@@ -12,33 +12,34 @@ function App() {
 
   return (
     <div className="App">
-      <section className="App__players">
+      <PlayerForm onSubmit={createPlayer} />
+
+      <ul className="App__playerList">
         {players.map((player, index) => (
-          <ScoreboardRow
-            key={player.name}
-            name={player.name}
-            score={player.score}
-            onMinus={() => handleScore(index)}
-            onPlus={() => handleScore(index, true)}
-          />
+          <li>
+            <ScoreboardRow
+              key={player.name}
+              name={player.name}
+              score={player.score}
+              onMinus={() => handleScore(index, -1)}
+              onPlus={() => handleScore(index, 1)}
+            />
+          </li>
         ))}
-      </section>
-      <section className="App__buttonContainer">
+      </ul>
+      <div className="App__buttons">
         <Button onClick={handleResetScore}>Reset score</Button>
         <Button onClick={handleResetAll}>Reset all</Button>
-      </section>
-      <section className="App__playerFormContainer">
-        <PlayerForm onSubmit={createPlayer} />
-      </section>
+      </div>
     </div>
   )
 
-  function handleScore(index, plus) {
+  function handleScore(index, value) {
     setPlayers([
       ...players.slice(0, index),
       {
         ...players[index],
-        score: plus ? players[index].score + 1 : players[index].score - 1,
+        score: players[index].score + value,
       },
       ...players.slice(index + 1),
     ])
@@ -47,22 +48,6 @@ function App() {
   function createPlayer(name) {
     setPlayers([...players, { name, score: 0 }])
   }
-
-  // function handleMinus(index) {
-  //   setPlayers([
-  //     ...players.slice(0, index),
-  //     { ...players[index], score: players[index].score - 1 },
-  //     ...players.slice(index + 1),
-  //   ])
-  // }
-
-  // function handlePlus(index) {
-  //   setPlayers([
-  //     ...players.slice(0, index),
-  //     { ...players[index], score: players[index].score + 1 },
-  //     ...players.slice(index + 1),
-  //   ])
-  // }
 
   function handleResetScore() {
     setPlayers(players.map(player => ({ ...player, score: 0 })))

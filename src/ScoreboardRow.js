@@ -17,7 +17,7 @@ export default function ScoreboardRow({ name, score, onMinus, onPlus }) {
         <button className="ScoreboardRow__button" onClick={onMinus}>
           -
         </button>
-        {score}
+        <output className="ScoreboardRow__score">{score}</output>
         <button className="ScoreboardRow__button" onClick={onPlus}>
           +
         </button>

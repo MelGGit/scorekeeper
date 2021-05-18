@@ -3,3 +3,8 @@
   flex-direction: column;
   gap: 5px;
 }
+
+.PlayerForm__input {
+  padding: 2px;
+  font-size: inherit;
+}

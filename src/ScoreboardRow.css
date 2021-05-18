@@ -14,6 +14,11 @@
   text-align: center;
 }
 
+.ScoreboardRow__score {
+  width: 3.2ch;
+  text-align: right;
+}
+
 .ScoreboardRow__button {
   display: flex;
   justify-content: center;
