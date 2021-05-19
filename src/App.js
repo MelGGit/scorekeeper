@@ -2,23 +2,19 @@ import PlayerForm from './PlayerForm'
 import ScoreboardRow from './ScoreboardRow'
 import Button from './Button'
 import { useState } from 'react'
-import './App.css'
+import styled from 'styled-components'
 
-function App() {
-  const [players, setPlayers] = useState([
-    { name: 'Mel', score: 100 },
-    { name: 'Marlin', score: 200 },
-  ])
+export default function App() {
+  const [players, setPlayers] = useState([])
 
   return (
-    <div className="App">
+    <AppWrapper>
       <PlayerForm onSubmit={createPlayer} />
 
-      <ul className="App__playerList">
+      <PlayerList>
         {players.map((player, index) => (
-          <li>
+          <li key={player.name}>
             <ScoreboardRow
-              key={player.name}
               name={player.name}
               score={player.score}
               onMinus={() => handleScore(index, -1)}
@@ -26,12 +22,12 @@ function App() {
             />
           </li>
         ))}
-      </ul>
-      <div className="App__buttons">
+      </PlayerList>
+      <ButtonWrapper>
         <Button onClick={handleResetScore}>Reset score</Button>
         <Button onClick={handleResetAll}>Reset all</Button>
-      </div>
-    </div>
+      </ButtonWrapper>
+    </AppWrapper>
   )
 
   function handleScore(index, value) {
@@ -58,4 +54,19 @@ function App() {
   }
 }
 
-export default App
+const AppWrapper = styled.div`
+  padding: 20px;
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  height: 100vh;
+  gap: 20px;
+`
+const PlayerList = styled.ul`
+  list-style: none;
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`

@@ -1,5 +1,5 @@
-import './PlayerForm.css'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 PlayerForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -8,15 +8,15 @@ PlayerForm.propTypes = {
 export default function PlayerForm({ onSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
-      <label className="PlayerForm__label">
+      <PlayerLabel>
         Add Player:
-        <input
+        <PlayerInput
           className="PlayerForm__input"
           type="text"
           name="name"
           placeholder="Player name"
         />
-      </label>
+      </PlayerLabel>
     </form>
   )
 
@@ -26,3 +26,13 @@ export default function PlayerForm({ onSubmit }) {
     e.target.reset()
   }
 }
+
+const PlayerLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`
+
+const PlayerInput = styled.input`
+  padding: 2px;
+`
