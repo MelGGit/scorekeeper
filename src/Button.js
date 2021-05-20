@@ -11,8 +11,7 @@ const Button = styled.button`
   transition-property: color, background;
 
   &:hover {
-    background: black;
-    color: white;
+    background: grey;
   }
 `
 

@@ -15,7 +15,12 @@ export default function HistoryEntry({ nameOfGame, players }) {
       <Header>{nameOfGame}</Header>
       <ul>
         {players.map(player => (
-          <Player name={player.name} score={player.score} disabled />
+          <Player
+            key={player.name}
+            name={player.name}
+            score={player.score}
+            disabled
+          />
         ))}
       </ul>
     </section>

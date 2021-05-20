@@ -11,7 +11,7 @@ export default function CreatePage({ onSubmit }) {
     <Form onSubmit={handleSubmit}>
       <Label>
         Name of game:
-        <input type="text" name="name" placeholder="e.g. John, Jane" />
+        <input type="text" name="name" placeholder="e.g. Carcassonne" />
       </Label>
       <Label>
         Player names:
