@@ -2,7 +2,7 @@ import PlayerForm from './PlayerForm'
 import ScoreboardRow from './ScoreboardRow'
 import Button from './Button'
 import { useState } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 export default function App() {
   const [players, setPlayers] = useState([])

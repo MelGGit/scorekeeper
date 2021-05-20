@@ -9,4 +9,20 @@ export default {
 const Template = args => <Navigation {...args} />
 
 export const DefaultNavigation = Template.bind({})
-DefaultNavigation.args = {}
+DefaultNavigation.args = {
+  currentPageId: 'play',
+  pages: [
+    { title: 'Play', id: 'play' },
+    { title: 'History', id: 'history' },
+  ],
+}
+
+export const ThreeNavigation = Template.bind({})
+ThreeNavigation.args = {
+  currentPageId: 'play',
+  pages: [
+    { title: 'Play', id: 'play' },
+    { title: 'History', id: 'history' },
+    { title: 'Something', id: 'something' },
+  ],
+}
