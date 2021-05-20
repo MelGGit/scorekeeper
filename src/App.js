@@ -1,5 +1,5 @@
 import PlayerForm from './PlayerForm'
-import ScoreboardRow from './ScoreboardRow'
+import Player from './Player'
 import Button from './Button'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
@@ -14,7 +14,7 @@ export default function App() {
       <PlayerList>
         {players.map((player, index) => (
           <li key={player.name}>
-            <ScoreboardRow
+            <Player
               name={player.name}
               score={player.score}
               onMinus={() => handleScore(index, -1)}

@@ -1,5 +1,5 @@
 import Header from './Header'
-import ScoreboardRow from './ScoreboardRow'
+import Player from './Player'
 import PropTypes from 'prop-types'
 
 HistoryEntry.propTypes = {
@@ -15,7 +15,7 @@ export default function HistoryEntry({ nameOfGame, players }) {
       <Header>{nameOfGame}</Header>
       <ul>
         {players.map(player => (
-          <ScoreboardRow name={player.name} score={player.score} disabled />
+          <Player name={player.name} score={player.score} disabled />
         ))}
       </ul>
     </section>

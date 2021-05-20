@@ -7,7 +7,7 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 10px;
   color: ${props => (props.isActive ? 'white' : 'black')};
-  transition: all 1s ease;
+  transition: all 0.5s ease;
   transition-property: color, background;
 
   &:hover {

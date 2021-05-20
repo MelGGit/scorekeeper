@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Button from './Button'
 
-describe('ScoreboardRow', () => {
+describe('Player', () => {
   it('returns a button with a name', async () => {
     const handleClick = jest.fn()
 
