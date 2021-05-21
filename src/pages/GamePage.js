@@ -45,7 +45,7 @@ export default function GamePage({
 
 const Container = styled.div`
   display: grid;
-  height: 100%;
+  width: 100%;
   gap: 20px;
   grid-template-rows: min-content min-content auto;
 `
@@ -55,7 +55,6 @@ const ButtonContainer = styled.div`
   gap: 10px;
   height: 100%;
   flex-direction: column;
-  justify-content: space-between;
 `
 const PlayerContainer = styled.div`
   display: grid;

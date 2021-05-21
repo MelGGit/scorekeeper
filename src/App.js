@@ -77,4 +77,8 @@ const AppContainer = styled.div`
 `
 const PageContainer = styled.div`
   padding: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

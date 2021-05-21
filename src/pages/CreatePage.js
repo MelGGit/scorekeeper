@@ -42,6 +42,7 @@ export default function CreatePage({ onSubmit }) {
 const Form = styled.form`
   display: grid;
   gap: 20px;
+  width: 100%;
 `
 
 const Label = styled.label`
