@@ -25,13 +25,13 @@ export default function GamePage({
     <Container>
       <Header>{nameOfGame}</Header>
       <PlayerContainer>
-        {players.map(({ name, score }) => (
+        {players.map(({ name, score }, index) => (
           <Player
             key={name}
             name={name}
             score={score}
-            onMinus={onScoreUpdate}
-            onPlus={onScoreUpdate}
+            onMinus={() => onScoreUpdate(index, -1)}
+            onPlus={() => onScoreUpdate(index, 1)}
           />
         ))}
       </PlayerContainer>

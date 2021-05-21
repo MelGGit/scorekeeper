@@ -8,7 +8,7 @@ CreatePage.propTypes = {
 
 export default function CreatePage({ onSubmit }) {
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form aria-label="create-page-form" onSubmit={handleSubmit}>
       <Label>
         Name of game:
         <input type="text" name="name" placeholder="e.g. Carcassonne" />
