@@ -1,36 +1,54 @@
-import PlayerForm from './PlayerForm'
-import ScoreboardRow from './ScoreboardRow'
-import Button from './Button'
+import { func } from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
+import Navigation from './Navigation'
+import CreatePage from './pages/CreatePage'
+import GamePage from './pages/GamePage'
+import HistoryPage from './pages/HistoryPage'
 
 export default function App() {
+  const [currentPageId, setCurrentPageId] = useState('create')
+  const [nameOfGame, setNameOfGame] = useState('')
   const [players, setPlayers] = useState([])
+  const [history, setHistory] = useState([])
+
+  const pages = [
+    { title: 'Create', id: 'create' },
+    { title: 'History', id: 'history' },
+  ]
 
   return (
-    <AppWrapper>
-      <PlayerForm onSubmit={createPlayer} />
-
-      <PlayerList>
-        {players.map((player, index) => (
-          <li key={player.name}>
-            <ScoreboardRow
-              name={player.name}
-              score={player.score}
-              onMinus={() => handleScore(index, -1)}
-              onPlus={() => handleScore(index, 1)}
-            />
-          </li>
-        ))}
-      </PlayerList>
-      <ButtonWrapper>
-        <Button onClick={handleResetScore}>Reset score</Button>
-        <Button onClick={handleResetAll}>Reset all</Button>
-      </ButtonWrapper>
-    </AppWrapper>
+    <AppContainer>
+      <PageContainer>
+        {currentPageId === 'create' && <CreatePage onSubmit={handleSubmit} />}
+        {currentPageId === 'game' && (
+          <GamePage
+            nameOfGame={nameOfGame}
+            players={players}
+            onResetScore={handleResetScore}
+            onScoreUpdate={handleScoreUpdate}
+            onEndGame={handleEndGame}
+          />
+        )}
+        {currentPageId === 'history' && <HistoryPage games={history} />}
+      </PageContainer>
+      {currentPageId !== 'game' && (
+        <Navigation
+          pages={pages}
+          currentPageId={currentPageId}
+          onNavigate={setCurrentPageId}
+        />
+      )}
+    </AppContainer>
   )
 
-  function handleScore(index, value) {
+  function handleSubmit({ nameOfGame, players }) {
+    setNameOfGame(nameOfGame)
+    setPlayers(players)
+    setCurrentPageId('game')
+  }
+
+  function handleScoreUpdate(index, value) {
     setPlayers([
       ...players.slice(0, index),
       {
@@ -41,32 +59,26 @@ export default function App() {
     ])
   }
 
-  function createPlayer(name) {
-    setPlayers([...players, { name, score: 0 }])
-  }
-
   function handleResetScore() {
     setPlayers(players.map(player => ({ ...player, score: 0 })))
   }
 
-  function handleResetAll() {
-    setPlayers([])
+  function handleEndGame() {
+    setCurrentPageId('history')
+    setHistory([{ nameOfGame, players }, ...history])
   }
 }
 
-const AppWrapper = styled.div`
-  padding: 20px;
-  display: grid;
-  grid-template-rows: min-content auto min-content;
+const AppContainer = styled.div`
   height: 100vh;
-  gap: 20px;
-`
-const PlayerList = styled.ul`
-  list-style: none;
-`
-
-const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+`
+const PageContainer = styled.div`
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

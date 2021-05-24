@@ -1,15 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import ScoreboardRow from './ScoreboardRow'
-describe('ScoreboardRow', () => {
+import Player from './Player'
+describe('Player', () => {
   it('returns a name, score and two buttons', async () => {
     render(
-      <ScoreboardRow
-        name="John"
-        score={55}
-        onPlus={() => {}}
-        onMinus={() => {}}
-      />
+      <Player name="John" score={55} onPlus={() => {}} onMinus={() => {}} />
     )
     const buttons = screen.getAllByRole('button')
     expect(screen.getByText('John')).toBeInTheDocument()
@@ -20,7 +15,7 @@ describe('ScoreboardRow', () => {
     const handleOnPlus = jest.fn()
     const handleOnMinus = jest.fn()
     render(
-      <ScoreboardRow
+      <Player
         name="John"
         score={0}
         onPlus={handleOnPlus}

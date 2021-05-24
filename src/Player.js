@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-ScoreboardRow.propTypes = {
+Player.propTypes = {
   name: PropTypes.string.isRequired,
   score: PropTypes.number,
   onMinus: PropTypes.func.isRequired,
@@ -9,13 +9,7 @@ ScoreboardRow.propTypes = {
   disabled: PropTypes.bool,
 }
 
-export default function ScoreboardRow({
-  name,
-  score,
-  onMinus,
-  onPlus,
-  disabled,
-}) {
+export default function Player({ name, score, onMinus, onPlus, disabled }) {
   return (
     <PlayerWrapper>
       {name}
@@ -55,7 +49,7 @@ const PlayerButton = styled.button`
   border: 1px solid black;
   cursor: pointer;
   background: white;
-  transition: all 0.75s ease;
+  transition: all 0.5s ease;
   transition-property: color, background;
   display: ${props => (props.disabled ? 'none' : '')};
 
