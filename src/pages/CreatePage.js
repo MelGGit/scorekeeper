@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 import Button from '../Button'
 import PropTypes from 'prop-types'
+import { Link, useHistory } from 'react-router-dom'
 
 CreatePage.propTypes = {
   onSubmit: PropTypes.func,
 }
 
 export default function CreatePage({ onSubmit }) {
+  const history = useHistory()
   return (
     <Form aria-label="create-page-form" onSubmit={handleSubmit}>
       <Label>
@@ -36,16 +38,20 @@ export default function CreatePage({ onSubmit }) {
       players,
     }
     onSubmit(game)
+    history.push('/game')
   }
 }
 
 const Form = styled.form`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  width: 100%;
+  width: 60%;
+  align-items: center;
 `
 
 const Label = styled.label`
   display: grid;
   gap: 5px;
+  width: 100%;
 `

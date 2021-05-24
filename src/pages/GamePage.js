@@ -3,6 +3,7 @@ import Header from '../Header'
 import Player from '../Player'
 import Button from '../Button'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 GamePage.propTypes = {
   nameOfGame: PropTypes.string,
@@ -21,6 +22,7 @@ export default function GamePage({
   onEndGame,
   onScoreUpdate,
 }) {
+  const history = useHistory()
   return (
     <Container>
       <Header>{nameOfGame}</Header>
@@ -37,26 +39,36 @@ export default function GamePage({
       </PlayerContainer>
       <ButtonContainer>
         <Button onClick={onResetScore}>Reset score</Button>
-        <Button onClick={onEndGame}>End game</Button>
+        <Button onClick={handleEndGame}>End game</Button>
       </ButtonContainer>
     </Container>
   )
+
+  function handleEndGame() {
+    onEndGame()
+    history.push('/history')
+  }
 }
 
 const Container = styled.div`
-  display: grid;
-  width: 100%;
-  gap: 20px;
-  grid-template-rows: min-content min-content auto;
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  gap: 50px;
 `
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 50px;
   height: 100%;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 const PlayerContainer = styled.div`
-  display: grid;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
 `

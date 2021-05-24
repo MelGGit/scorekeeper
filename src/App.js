@@ -1,10 +1,10 @@
-import { func } from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import Navigation from './Navigation'
 import CreatePage from './pages/CreatePage'
 import GamePage from './pages/GamePage'
 import HistoryPage from './pages/HistoryPage'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 export default function App() {
   const [currentPageId, setCurrentPageId] = useState('create')
@@ -18,28 +18,36 @@ export default function App() {
   ]
 
   return (
-    <AppContainer>
-      <PageContainer>
-        {currentPageId === 'create' && <CreatePage onSubmit={handleSubmit} />}
-        {currentPageId === 'game' && (
-          <GamePage
-            nameOfGame={nameOfGame}
-            players={players}
-            onResetScore={handleResetScore}
-            onScoreUpdate={handleScoreUpdate}
-            onEndGame={handleEndGame}
+    <Router>
+      <AppContainer>
+        <PageContainer>
+          <Switch>
+            <Route exact path="/">
+              <CreatePage onSubmit={handleSubmit} />
+            </Route>
+            <Route path="/game">
+              <GamePage
+                nameOfGame={nameOfGame}
+                players={players}
+                onResetScore={handleResetScore}
+                onScoreUpdate={handleScoreUpdate}
+                onEndGame={handleEndGame}
+              />
+            </Route>
+            <Route path="/history">
+              <HistoryPage games={history} />
+            </Route>
+          </Switch>
+        </PageContainer>
+        {currentPageId !== 'game' && (
+          <Navigation
+            pages={pages}
+            currentPageId={currentPageId}
+            onNavigate={setCurrentPageId}
           />
         )}
-        {currentPageId === 'history' && <HistoryPage games={history} />}
-      </PageContainer>
-      {currentPageId !== 'game' && (
-        <Navigation
-          pages={pages}
-          currentPageId={currentPageId}
-          onNavigate={setCurrentPageId}
-        />
-      )}
-    </AppContainer>
+      </AppContainer>
+    </Router>
   )
 
   function handleSubmit({ nameOfGame, players }) {
@@ -78,6 +86,7 @@ const AppContainer = styled.div`
 const PageContainer = styled.div`
   padding: 20px;
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -25,4 +25,5 @@ export default function HistoryPage({ games }) {
 const Container = styled.div`
   display: grid;
   gap: 30px;
+  width: 60%;
 `
