@@ -3,7 +3,6 @@ import Header from '../Header'
 import Player from '../Player'
 import Button from '../Button'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
 
 GamePage.propTypes = {
   nameOfGame: PropTypes.string,
@@ -22,7 +21,6 @@ export default function GamePage({
   onEndGame,
   onScoreUpdate,
 }) {
-  const history = useHistory()
   return (
     <Container>
       <Header>{nameOfGame}</Header>
@@ -46,7 +44,6 @@ export default function GamePage({
 
   function handleEndGame() {
     onEndGame()
-    history.push('/history')
   }
 }
 

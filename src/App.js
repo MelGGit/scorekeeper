@@ -4,13 +4,15 @@ import Navigation from './Navigation'
 import CreatePage from './pages/CreatePage'
 import GamePage from './pages/GamePage'
 import HistoryPage from './pages/HistoryPage'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom'
 
 export default function App() {
-  const [currentPageId, setCurrentPageId] = useState('create')
   const [nameOfGame, setNameOfGame] = useState('')
   const [players, setPlayers] = useState([])
   const [history, setHistory] = useState([])
+
+  const { push } = useHistory()
+  const { pathname } = useLocation()
 
   const pages = [
     { title: 'Create', id: 'create' },
@@ -18,42 +20,35 @@ export default function App() {
   ]
 
   return (
-    <Router>
-      <AppContainer>
-        <PageContainer>
-          <Switch>
-            <Route exact path="/">
-              <CreatePage onSubmit={handleSubmit} />
-            </Route>
-            <Route path="/game">
-              <GamePage
-                nameOfGame={nameOfGame}
-                players={players}
-                onResetScore={handleResetScore}
-                onScoreUpdate={handleScoreUpdate}
-                onEndGame={handleEndGame}
-              />
-            </Route>
-            <Route path="/history">
-              <HistoryPage games={history} />
-            </Route>
-          </Switch>
-        </PageContainer>
-        {currentPageId !== 'game' && (
-          <Navigation
-            pages={pages}
-            currentPageId={currentPageId}
-            onNavigate={setCurrentPageId}
-          />
-        )}
-      </AppContainer>
-    </Router>
+    <AppContainer>
+      <PageContainer>
+        <Switch>
+          <Route exact path="/">
+            <CreatePage onSubmit={handleSubmit} />
+          </Route>
+          <Route path="/game">
+            <GamePage
+              nameOfGame={nameOfGame}
+              players={players}
+              onResetScore={handleResetScore}
+              onScoreUpdate={handleScoreUpdate}
+              onEndGame={handleEndGame}
+            />
+          </Route>
+          <Route path="/history">
+            <HistoryPage games={history} />
+          </Route>
+        </Switch>
+      </PageContainer>
+      {pathname !== '/game' && <Navigation pages={pages} />}
+    </AppContainer>
   )
 
   function handleSubmit({ nameOfGame, players }) {
     setNameOfGame(nameOfGame)
     setPlayers(players)
-    setCurrentPageId('game')
+
+    push('/game')
   }
 
   function handleScoreUpdate(index, value) {
@@ -72,8 +67,8 @@ export default function App() {
   }
 
   function handleEndGame() {
-    setCurrentPageId('history')
     setHistory([{ nameOfGame, players }, ...history])
+    push('/history')
   }
 }
 

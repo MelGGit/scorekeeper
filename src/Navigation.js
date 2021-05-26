@@ -11,17 +11,12 @@ Navigation.propTypes = {
   currentPageId: PropTypes.string,
 }
 
-export default function Navigation({ onNavigate, pages, currentPageId }) {
+export default function Navigation({ pages }) {
   return (
     <Navbar>
       {pages.map(({ title, id }) => (
         <NavbarLink key={id} to={id === 'create' ? '/' : `/${id}`}>
-          <NavbarButton
-            isActive={currentPageId === id}
-            onClick={() => onNavigate(id)}
-          >
-            {title}
-          </NavbarButton>
+          <NavbarButton>{title}</NavbarButton>
         </NavbarLink>
       ))}
     </Navbar>
